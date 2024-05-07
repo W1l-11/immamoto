@@ -1,60 +1,8 @@
-<?php 
-require 'function.php';
+@extends('layout.app')
 
-if(isset($_POST["login"])){
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+@section('title', 'Login')
 
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
-
-    //cek username
-    if(mysqli_num_rows($result) === 1){
-        //cek password
-        $row = mysqli_fetch_assoc($result);
-        if(password_verify($password, $row["password"])){
-            header("Location: ../pageafterlogin/index_login.php  ");
-            exit;
-        }
-    }
-    $error = true;
-}
-
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Immamoto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-.gradient-custom-2 {
-/* fallback for old browsers */
-background: #fccb90;
-
-/* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to bottom, #c01010, #471010);
-
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to bottom , #c01010, #471010);
-}
-
-@media (min-width: 768px) {
-.gradient-form {
-height: 100vh !important;
-}
-}
-@media (min-width: 769px) {
-.gradient-custom-2 {
-border-top-right-radius: .3rem;
-border-bottom-right-radius: .3rem;
-}
-}
-    </style>
-</head>
-<body>
-
-
+@section('content')
 <section class="h-100 gradient-form">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -68,11 +16,8 @@ border-bottom-right-radius: .3rem;
                   <h2 class="mt-1 mb-5 pb-1">Masuk</h2>
                 </div>
 
-                <form method="post" action="">
-                <?php if(isset($error)): ?>
-                  <div class="error-message text-danger">Email atau Password Salah!</div>
-                    <br>
-                  <?php endif; ?>
+                <form method="post" action="{{ route('login-process') }}">
+                    @csrf
                   <div data-mdb-input-init class="form-outline mb-4">
                   <label class="form-label" for="email">Email: </label>
                     <input type="email" id="email" name="email" class="form-control" placeholder="user@example.com" required/>
@@ -89,7 +34,7 @@ border-bottom-right-radius: .3rem;
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">Belum Punya Akun?</p>
-                    <a href="login.php">Buat Sekarang</a>                   
+                    <a href="{{ route('register') }}">Buat Sekarang</a>
                   </div>
 
                 </form>
@@ -109,7 +54,4 @@ border-bottom-right-radius: .3rem;
     </div>
   </div>
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection
