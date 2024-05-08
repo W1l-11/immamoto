@@ -35,7 +35,7 @@
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="email">Email: </label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="user1234@gmail.com" required/>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="user1234@gmail.com" required/>
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">

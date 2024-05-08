@@ -16,10 +16,13 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['check_login:dealer'])->prefix('/dealer')->name('dealer')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::middleware(['check_login:customer'])->prefix('/customer')->name('customer')->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('.index');
     });
-    Route::middleware(['check_login:customer'])->prefix('/customer')->name('customer')->group(function () {
+
+    Route::middleware(['check_login:dealer'])->prefix('/dealer')->name('dealer')->group(function () {
         Route::get('/', [DealerController::class, 'index'])->name('.index');
     });
 });

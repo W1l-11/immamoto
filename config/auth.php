@@ -64,6 +64,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
+        // RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         // 'users' => [
         //     'driver' => 'database',

@@ -14,12 +14,15 @@ class CheckLogin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+
+    protected $redirectTo = '/';
+
     public function handle(Request $request, Closure $next, $user_type): Response
     {
         if (Auth::check() && Auth::user()->user_type == $user_type) {
             return $next($request);
+        } else {
+            return redirect()->route('login');
         }
-
-        return redirect()->route('login');
     }
 }

@@ -15,11 +15,12 @@
     <body>
         @once
         @unless (request()->is('register') || request()->is('login'))
-            @include('layout.navbar')
+        @include('layout.navbar')
         @endunless
         @endonce
-
+        
         <main>
+            @include('sweetalert::alert')
             @yield('content')
         </main>
 
@@ -28,8 +29,12 @@
                 @include('layout.footer')
             @endunless
         @endonce
+        <script src="main.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/js/tw-elements.umd.min.js"></script>
     </body>
 </html>
