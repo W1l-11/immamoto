@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>index</title>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
+@extends('layout.app')
+@section('title', 'Profile')
+    
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-            <style type="text/tailwindcss">
+@section('content')
+<style type="text/tailwindcss">
     @layer utilities {
       .content-auto {
         content-visibility: auto;
@@ -309,49 +302,8 @@ margin-right: 10px;
 }
 
         </style>
-    </head>
-    <body>
-
-    <!-- Navbar --> 
-
-    <!-- Navbar --> 
-
-    <div class="navbar">
-        <div class="navbar-logo"><img src="../images/Logo.png" alt=""></div>
-        <div class="navbar-buttons">
-            <!-- Tombol Profile -->
-            <button class="btn btn-profile" onclick="window.location.href='profil.php'"><img src="../images/account.png" alt="Profile" width="45px" height="45px"></button>
-            <!-- Tombol Jual -->
-            <button class="btn btn-jual" onclick="window.location.href='jual.php'">Jual</button>
-        </div>
-    </div>
-
-    <!-- Extended Navbar --> 
-
-    <nav role="navigation" class="primary-navigation">
-  <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="#">Kategori &dtrif;</a>
-    <ul class="dropdown">
-        <li><a href="#">Super Bike</a></li>
-        <li><a href="#">Sports Bike</a></li>
-        <li><a href="#">Scooter</a></li>
-        <li><a href="#">Normal</a></li>
-      </ul>
-    <li>
-        <a href="#">Pemakaian &dtrif;</a>
-      <ul class="dropdown">
-        <li><a href="#">Bekas</a></li>
-        <li><a href="#">Baru</a></li>
-      </ul>
-    </li>
-    <li><a href="#">Lokasi</a></li>
-    <li><a href="pesanan.php">Keranjang</a></li>
-  </ul>
-</nav>
 
 <!-- Profile -->
-
 <div class="section_awal flex flex-row w-full px-12 gap-10 items-center justify-between">
     <div class="flex flex-row items-center gap-4">
         <div class="profile-pic w-[110px] py-6">
@@ -430,45 +382,4 @@ margin-right: 10px;
         </div>
     </div>
 </div>
-
-<!-- Footer -->
-<footer style="background-color: #6f1919; color: white; text-align: center; padding: 20px;">
-    <div style="display: flex; justify-content: space-between;">
-        <div style="flex-basis: 20%;">
-            <h4>IMMAMOTO</h4>
-            <ul style="list-style-type: none; padding-left: 0;">
-                <li>Our Team</li>
-                <li>Contact Support</li>
-            </ul>
-        </div>
-        <div style="flex-basis: 20%;">
-            <h4>Kategori Populer</h4>
-            <ul style="list-style-type: none; padding-left: 0;">
-                <li>Motor Sport</li>
-                <li>Super Bike</li>
-                <li>Naked Bike</li>
-                <li>Normal Bike</li>
-            </ul>
-        </div>
-        <div style="flex-basis: 20%;">
-            <h4>Hubungi Kami</h4>
-            <ul style="list-style-type: none; padding-left: 0;">
-                <li>0812-3278-6221</li>
-            </ul>
-        </div>
-        <div style="flex-basis: 20%;">
-            <h4>Media Sosial</h4>
-            <ul style="list-style-type: none; padding-left: 0;">
-                <li><img src="instagram.png" alt="">@immamoto</li>
-                <li><img src="facebook (1).png" alt="">@immamoto</li>
-                <li><img src="twitter.png" alt="">@immamoto</li>
-            </ul>
-        </div>
-    </div>
-    <p>&copy; 2024 ImmaMoto. All Rights Reserved.</p>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-<script src="main.js"></script>
-    </body>
-    </html>
+@endsection
