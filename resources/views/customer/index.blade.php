@@ -381,23 +381,25 @@
     vertical-align: middle;
     margin-right: 10px; 
     }
+    #default-carousel {
+    z-index: 0;
+}
 </style>
-
 
 <div id="default-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
          <!-- Item 1 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="../images/cbr250rr.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="{{ asset('motorex.jpg') }}" class="object-scale-down absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
         </div>
         <!-- Item 2 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="../images/r6.jpeg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="{{ asset('motorex2.jpg') }}" class="object-scale-down absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
         </div>
         <!-- Item 3 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="../images/zx25r.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <img src="{{ asset('motorex2.webp') }}" class="object-scale-down absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
         </div>
     </div>
     <!-- Slider indicators -->
@@ -435,41 +437,20 @@
 <!-- Card motor -->
 
 <div class="card-container">
-    <!-- Card 1 -->
-    <div class="product-card">
-        <img src="motor1.png" alt="Motor 1">
-        <div class="card-content">
-            <h3>Motor 1</h3>
-            <p>Rp 50.000.000</p>
-        </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="product-card">
-        <img src="motor1.png" alt="Motor 1">
-        <div class="card-content">
-            <h3>Motor 1</h3>
-            <p>Rp 50.000.000</p>
-        </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="product-card">
-        <img src="motor1.png" alt="Motor 1">
-        <div class="card-content">
-            <h3>Motor 1</h3>
-            <p>Rp 50.000.000</p>
-        </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="product-card">
-        <img src="motor1.png" alt="Motor 1">
-        <div class="card-content">
-            <h3>Motor 1</h3>
-            <p>Rp 50.000.000</p>
-        </div>
-    </div>
+    @if (count($motors) > 0)
+        @foreach ($motors as $motor)
+            <!-- Card 1 -->
+            <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
+                <img src="{{ asset($motor->image.'.png') }}" alt="{{ $motor->image }}">
+                <div class="card-content">
+                    <h3>{{ $motor->name }}</h3>
+                    <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
+                </div>
+            </a>
+        @endforeach
+    @else
+        <p>Tidak ada motor untuk saat ini</p>
+    @endif
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

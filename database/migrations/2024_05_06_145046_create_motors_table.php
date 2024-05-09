@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
+            $table->string('type');
+            $table->string('merk');
             $table->integer('price');
             $table->integer('released_year');
             $table->integer('used_year');

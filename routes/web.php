@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['check_login:customer'])->prefix('/customer')->name('customer')->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('.index');
+        Route::get('/view-motor/{motor}', [CustomerController::class, 'viewMotor'])->name('.view-motor');
     });
 
     Route::middleware(['check_login:dealer'])->prefix('/dealer')->name('dealer')->group(function () {
