@@ -93,7 +93,7 @@
         }
 
         .btn-jual:hover::before {
-            color: #545f71; 
+            color: #545f71;
         }
 
         nav {
@@ -101,7 +101,7 @@
         margin: 0 auto;
         display: block;
 
-        padding: 5px 0 0 0;  
+        padding: 5px 0 0 0;
         text-align: center;
         font-size: 16px;
 
@@ -186,18 +186,18 @@
         }
 
         .primary-navigation li {
-        position: relative; 
+        position: relative;
         }
 
         .primary-navigation li a {
         display: block;
-        padding: 10px; 
-        color: #000; 
+        padding: 10px;
+        color: #000;
         text-decoration: none;
         }
         .primary-navigation li:hover > a {
         background-color: #f0f0f0;
-        color: #545f71; 
+        color: #545f71;
         }
 
 
@@ -206,7 +206,7 @@
         position: absolute;
         left: 0;
         top: 100%;
-        background-color: #fff; 
+        background-color: #fff;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
         }
@@ -231,7 +231,7 @@
         }
 
         footer h4, footer ul, footer p {
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
         }
 
         footer ul {
@@ -240,12 +240,12 @@
         }
 
         footer li {
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
         }
 
         footer img {
         vertical-align: middle;
-        margin-right: 10px; 
+        margin-right: 10px;
         }
 
         #carouselExampleCaptions img {
@@ -426,8 +426,8 @@
         <!-- card footer -->
         <div class="p-8 bg-white border-gray-200 text-center">
             <!-- button link -->
-            <a class="bg-red-500 shadow-md text-sm text-white font-bold py-3 md:px-28 px-4 hover:bg-red-400 rounded-full uppercase" 
-                href="#">Checkout</a>
+            <a class="bg-red-500 shadow-md text-sm text-white font-bold py-3 md:px-28 px-4 hover:bg-red-400 rounded-full uppercase"
+                href="{{route('customer.checkout-motor', $motor->id)}}">Checkout</a>
         </div>
     </div>
 </div>
