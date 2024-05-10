@@ -26,4 +26,17 @@ class CustomerController extends Controller
         $payments  = Payment::get();
         return view('customer.checkout', compact('motor', 'sendOptions', 'payments'));
     }
+
+    public function payment(Request $request)
+    {
+        $price = $request->price;
+        $amount = $request->amount;
+        $name = $request->name;
+        $address = $request->address;
+        $sendOption = SendOption::find($request->send_option);
+        $payment = Payment::find($request->payment_method);
+        $totalPayment = ($price * $amount) + $sendOption->cost + $payment->fee;
+
+        return view('customer.payment', compact('sendOption', 'payment', 'totalPayment', 'price'));
+    }
 }

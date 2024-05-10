@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('dealer_id');
             $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('motor_id');
-            $table->unsignedBigInteger('is_success');
+            $table->boolean('is_success');
             $table->timestamp('datetime');
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('dealer_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('payment_id')->references('id')->on('payments');
             $table->foreign('motor_id')->references('id')->on('motors');
         });
