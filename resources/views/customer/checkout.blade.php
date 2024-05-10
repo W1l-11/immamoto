@@ -285,25 +285,10 @@
 <!-- Riwayat atas -->
 <!-- Card -->
 
-<div class="riwayat flex flex-row">
-<div class="pembungkus px-12">
-<a id="card" href="cardview.php" class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 px-4 py-2">
-  <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-48">
-    <img src="{{asset('zx25r.png')}}" alt="">
-  </div>
-  <div class="p-6">
-    <div class="flex items-center justify-between mb-2">
-      <p class="block font-sans text-xl antialiased font-medium leading-relaxed text-blue-gray-900">
-        Rp {{ number_format($motor->price, 2, ',', '.') }}
-      </p>
-    </div>
-    <p class="block font-sans text-lg antialiased font-normal leading-normal text-gray-700 opacity-75">
-        {{ $motor->name }}
-    </p>
-  </div>
-  <div class="p-6 pt-0"></div>
-</a>
+
 </div>
+<form action="{{ route('customer.payment') }}" method="POST">
+    @csrf
 
 <div class="deskripsi">
   <div class="flex flex-col gap-2">
@@ -311,10 +296,11 @@
         <pre class="font-bold text-lg">Nama Motor       : {{ $motor->name }}</pre>
         <pre class="font-bold text-lg">Tahun Motor      : {{ $motor->released_year }}</pre>
         <pre class="font-bold text-lg">Tipe             : {{ $motor->type }}</pre>
-        <pre class="font-bold text-lg">Lama Penggunaan  : {{ $motor->used_year }}</p>
-        <pre class="font-bold text-lg">Deskripsi        : {{ $motor->description }}</p>
-        <div class="flex flex-row gap-32 items-center">
+        <pre class="font-bold text-lg">Lama Penggunaan  : {{ $motor->used_year }}</pre>
+        <pre class="font-bold text-lg">Deskripsi        : {{ $motor->description }}</pre>
+            <div class="flex flex-row gap-32 items-center">
             <label for="amount" class=" font-bold text-lg" >Jumlah</label>
+            <input type="hidden" name="price" value="{{ $motor->price }}">
             <input name="amount" type="number" value="1" class="font-bold text-2xl">
         </div>
 
@@ -335,7 +321,7 @@
         <label for="address">Alamat pengiriman</label>
         <input type="text" value="{{ auth()->user()->address }}" name="address" class="font-bold text-lg">
         <label for="send_option">Opsi pengiriman</label>
-        <select value="{{ auth()->user()->address }}" name="send_option" class="font-bold text-lg">
+        <select value="{{ auth()->user()->address }}" name="send_option" required class="font-bold text-lg">
             <option value="">Pilih opsi pengiriman</option>
             @foreach ($sendOptions as $sendOption)
                 <option value="{{ $sendOption->id }}">{{ $sendOption->name }}</option>
@@ -344,14 +330,14 @@
   </div>
 </div>
 <br>
-<div class="deskripsi_bawah_lanjutan">
+{{-- <div class="deskripsi_bawah_lanjutan">
   <div class="flex flex-col gap-2">
         <p class="font-bold text-lg">Subtotal :      </p>
         <pre class="font-bold text-lg">Biaya Pengiriman : </pre>
         <pre class="font-bold text-lg">Potongan Harga   : </pre>
         <pre class="font-bold text-lg">Total Harga      : </pre>
   </div>
-</div>
+</div> --}}
 {{-- <div class="judul">
   <p class="font-bold text-3xl">Rincian Pembayaran</p>
 </div> --}}
@@ -364,11 +350,11 @@
         <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full px-4 py-2">
             <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
                 <p class="font-bold text-2xl">Pembayaran Melalui Virtual Account</p>
-                <div class="isi_card flex flex-row justify-between">
+                <div class="isi_card flex flex-row justify-between items-center">
                     <div class="payment_option py-8 px-4 gap-2">
                         @foreach ($payments as $payment)
                             <div class="flex flex-row items-center gap-2">
-                                <input type="radio" value="{{ $payment->id }}" name="payment_method">
+                                <input type="radio" value="{{ $payment->id }}" required name="payment_method">
                                 <img src="{{asset($payment->name.'.png')}}" alt="" class="w-24 px-4 object-scale-down">
                                 <p class="font-bold text-base">{{ $payment->name }}</p>
                             </div>
@@ -417,41 +403,25 @@
 <br>
 <br>
 
-<div class="checkout-bar flex justify-between border-2 rounded-full">
-    <div class="kiri flex flex-row items-center justify-center w-96">
+{{-- <div class="checkout-bar flex justify-between border-2 rounded-full">
+    <div class="kiri flex flex-row items-center py-4 justify-center w-96">
         <p class="text-base font-bold px-3 text-white">.</p>
     </div>
     <div class="tengah flex flex-col py-4">
         <p class="font-bold text-lg">Total : </p>
-        {{-- <p class="font-bold text-lg">Hemat : </p> --}}
+        <p class="font-bold text-lg">Hemat : </p>
     </div>
     <button type="button" data-modal-toggle="modal" data-modal-target="modal" class="font-bold text-lg text-white kanan flex items-center justify-center bg-red-600 w-96 rounded-r-full">
         Checkout
     </button>
-</div>
+</div> --}}
+<button type="submit" class="checkout-bar border-2 h-20 w-full font-bold text-lg text-white kanan flex items-center justify-center bg-red-600 rounded-full">
+    Checkout
+</button>
+</form>
+
 
 <br><br><br>
-
-<!-- Modal -->
-<div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center">
-  <div class="modal-overlay absolute inset-0 bg-gray-900 opacity-50"></div>
-
-  <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-    <!-- Bagian isi modal -->
-    <div class="modal-content py-4 text-left px-6">
-      <!-- Tombol tutup modal -->
-      <div class="flex justify-between items-center pb-3">
-        <p class="font-bold text-2xl">Pembayaran</p>
-        <button data-modal-hide="modal" id="close-modal" class="modal-close px-4 py-2 bg-gray-800 text-white text-xl rounded-full focus:outline-none">&times;</button>
-      </div>
-      <p class="mb-2">Rincian Pembayaran: </p>
-      <!-- Isi rincian pembayaran disini -->
-      <p class="mb-2">Total Pembayaran: </p>
-      <p class="mb-4">Nomor Virtual Account: </p>
-      <!-- Jika perlu tambahkan rincian lainnya -->
-    </div>
-  </div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="main.js"></script>
@@ -479,7 +449,6 @@
       modal.classList.add('hidden');
     }
   });
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/js/tw-elements.umd.min.js"></script>
+
 @endsection
