@@ -3,6 +3,8 @@
 @section('title', 'Login')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 <section class="h-100 gradient-form">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -20,7 +22,7 @@
                     @csrf
                   <div data-mdb-input-init class="form-outline mb-4">
                   <label class="form-label" for="email">Email: </label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="user@example.com" required/>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="user@example.com" value="{{ old('email') }}" required/>
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">

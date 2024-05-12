@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,6 +15,7 @@ return new class extends Migration
         Schema::create('motors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('dealer_id');
             $table->string('image');
             $table->string('type');
             $table->string('merk');
@@ -23,6 +25,8 @@ return new class extends Migration
             $table->integer('amount');
             $table->text('description');
             $table->timestamps();
+
+            $table->foreign('dealer_id')->references('id')->on('users');
         });
     }
 

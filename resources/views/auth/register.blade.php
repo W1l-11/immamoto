@@ -3,6 +3,8 @@
 @section('title', 'Register')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <section class="h-100 gradient-form">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -21,12 +23,12 @@
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="name">Nama: </label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="KynaMotorOffc" required/>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="KynaMotorOffc" required value="{{ old('name') }}"/>
                         </div>
-                        
+
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="name">Tipe akun: </label>
-                            <select type="text" id="name" name="user_type" class="form-control" placeholder="" required/>
+                            <select type="text" id="name" name="user_type" class="form-control" placeholder="" required value="{{ old('user_type') }}"/>
                                 <option value="">Pilih tipe akun</option>
                                 <option value="dealer">Dealer</option>
                                 <option value="customer">Customer</option>
@@ -35,27 +37,27 @@
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="email">Email: </label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="user1234@gmail.com" required/>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="user1234@gmail.com" required value="{{ old('email') }}"/>
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="number">No Handphone: </label>
-                            <input type="tel" id="number" name="number" class="form-control" placeholder="089512341234" required/>
+                            <input type="number" id="number" name="number" class="form-control" placeholder="089512341234" required value="{{ old('number') }}"/>
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="address">Alamat: </label>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="Kalimantan Barat, Pontianak,..." required/>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Kalimantan Barat, Pontianak,..." required value="{{ old('address') }}"/>
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="password">Password: </label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="********" required/>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="********" required "/>
                         </div>
 
                         <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="retype_password">Konfirmasi Password: </label>
-                            <input type="password" id="retype_password" name="retype_password" class="form-control" placeholder="********" required/>
+                            <input type="password" id="retype_password" name="retype_password" class="form-control" placeholder="********" required "/>
                         </div>
 
                         <div class="text-center pt-1 mb-5 pb-1">

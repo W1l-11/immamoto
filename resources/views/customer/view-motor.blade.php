@@ -397,6 +397,7 @@
 <div class="deskripsi flex flex-row justify-between">
   <div class="deskripsi-kiri">
   <div class="flex flex-col px-20 py-24 gap-2">
+
         <pre class="font-bold text-lg">Merek Motor      : {{ $motor->merk }}</pre>
         <pre class="font-bold text-lg">Nama Motor       : {{ $motor->name }}</pre>
         <pre class="font-bold text-lg">Tahun Motor      : {{ $motor->released_year }}</pre>
@@ -426,8 +427,8 @@
         <!-- card footer -->
         <div class="p-8 bg-white border-gray-200 text-center">
             <!-- button link -->
-            <a class="bg-red-500 shadow-md text-sm text-white font-bold py-3 md:px-28 px-4 hover:bg-red-400 rounded-full uppercase"
-                href="{{route('customer.checkout-motor', $motor->id)}}">Checkout</a>
+            <a class="bg-red-500 shadow-md text-sm text-white font-bold py-3 md:px-28 px-10 hover:bg-red-400 rounded-full uppercase"
+                href="{{route('customer.checkout-motor', $motor->id)}}">Beli    </a>
         </div>
     </div>
 </div>

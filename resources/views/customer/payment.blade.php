@@ -259,13 +259,24 @@
     }
 
 
-
-</style>
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <h2 class="px-14 py-8 font-bold text-2xl">Pembayaran</h2>
 <div class="flex flex-col gap-2 px-14 pb-8">
-    <pre class="font-bold text-lg">Harga motor             : Rp {{number_format($price, 2, ',', '.') }}</pre>
-    <pre class="font-bold text-lg">Pajak transfer          : Rp {{number_format($payment->fee, 2, ',', '.') }}</pre>
-    <pre class="font-bold text-lg">Biaya pengiriman        : Rp {{number_format($sendOption->cost, 2, ',', '.') }}</pre>
-    <pre class="font-bold text-lg">Total pembayaran        : Rp {{number_format($totalPayment, 2, ',', '.') }}</pre>
+    <form action="{{ route('customer.confirm-payment') }}" method="POST">
+        @csrf
+        <input type="hidden" name="dealer_id" value="{{ $dealerId }}">
+        <input type="hidden" name="send_option_id" value="{{ $sendOptionId }}">
+        <input type="hidden" name="payment_id" value="{{ $paymentId }}">
+        <input type="hidden" name="motor_id" value="{{ $motorId }}">
+        <pre class="font-bold text-lg">Harga motor             : Rp {{number_format($price, 2, ',', '.') }}</pre>
+        <pre class="font-bold text-lg">Pajak transfer          : Rp {{number_format($payment->fee, 2, ',', '.') }}</pre>
+        <pre class="font-bold text-lg">Biaya pengiriman        : Rp {{number_format($sendOption->cost, 2, ',', '.') }}</pre>
+        <pre class="font-bold text-lg">Total pembayaran        : Rp {{number_format($totalPayment, 2, ',', '.') }}</pre>
+        <br>
+        <button type="submit" class="checkout-bar border-2 h-20 w-full font-bold text-lg text-white kanan flex items-center justify-center bg-red-600 rounded-full">
+            Konfirmasi pembelian
+        </button>
+    </form>
 </div>
 @endsection

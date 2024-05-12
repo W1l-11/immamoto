@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/view-motor/{motor}', [CustomerController::class, 'viewMotor'])->name('.view-motor');
         Route::get('/checkout/{motor}', [CustomerController::class, 'checkoutMotor'])->name('.checkout-motor');
         Route::post('/payment', [CustomerController::class, 'payment'])->name('.payment');
+        Route::post('/confirm-payment', [CustomerController::class, 'confirmPayment'])->name('.confirm-payment');
     });
 
     Route::middleware(['check_login:dealer'])->prefix('/dealer')->name('dealer')->group(function () {

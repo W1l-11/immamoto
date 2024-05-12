@@ -17,12 +17,14 @@ return new class extends Migration
             $table->unsignedBigInteger('dealer_id');
             $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('motor_id');
+            $table->unsignedBigInteger('send_option_id');
             $table->boolean('is_success');
             $table->timestamp('datetime');
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('dealer_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('payment_id')->references('id')->on('payments');
+            $table->foreign('send_option_id')->references('id')->on('send_options');
             $table->foreign('motor_id')->references('id')->on('motors');
         });
     }

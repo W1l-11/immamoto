@@ -1,19 +1,21 @@
 <div class="navbar">
     <div class="navbar-logo"><img src="{{asset('Logo.png')}}" alt=""></div>
         <div class="navbar-buttons">
-            <!-- Tombol Daftar -->
-            <a href="{{ route('register') }}" class="btn btn-daftar">Daftar</a>
-            <!-- Tombol Masuk -->
-            <a href="{{ route('login') }}" class="btn btn-masuk">Masuk</a>
-            
-            @auth
-                <!-- Tombol Jual -->
-                @if (auth()->user()->user_type == 'dealer')
-                    <a href="" class="btn btn-jual">Jual</a>
-                @endif
-                <a href="#" class="btn btn-profile"><img src="{{ asset('account.png') }}" alt="Profile" width="45px" height="45px"></a>
-                <a href="{{ route('logout') }}" class="text-red-700 font-bold">Logout</a>
-            @endauth
+            @if (!auth()->user())
+                <!-- Tombol Daftar -->
+                <a href="{{ route('register') }}" class="btn btn-daftar">Daftar</a>
+                <!-- Tombol Masuk -->
+                <a href="{{ route('login') }}" class="btn btn-masuk">Masuk</a>
+            @else
+                @auth
+                    <!-- Tombol Jual -->
+                    @if (auth()->user()->user_type == 'dealer')
+                        <a href="" class="btn btn-jual">Jual</a>
+                    @endif
+                    <a href="#" class="btn btn-profile"><img src="{{ asset('account.png') }}" alt="Profile" width="45px" height="45px"></a>
+                    <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+                @endauth
+            @endif
         </div>
     </div>
 
@@ -42,7 +44,7 @@
     </nav>
 
     @unless (!request()->is('view-motor'))
-        
+
     <div class="search-filter-container">
         <div class="search-bar">
             <input type="text" placeholder="Search" class="search-input">

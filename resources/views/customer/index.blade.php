@@ -78,7 +78,7 @@
     }
 
     .btn-jual:hover::before {
-        color: #545f71; 
+        color: #545f71;
     }
 
     nav {
@@ -86,7 +86,7 @@
     margin: 0 auto;
     display: block;
 
-    padding: 5px 0 0 0;  
+    padding: 5px 0 0 0;
     text-align: center;
     font-size: 16px;
 
@@ -171,18 +171,18 @@
     }
 
     .primary-navigation li {
-    position: relative; 
+    position: relative;
     }
 
     .primary-navigation li a {
     display: block;
-    padding: 10px; 
-    color: #000; 
+    padding: 10px;
+    color: #000;
     text-decoration: none;
     }
     .primary-navigation li:hover > a {
     background-color: #f0f0f0;
-    color: #545f71; 
+    color: #545f71;
     }
 
 
@@ -191,7 +191,7 @@
     position: absolute;
     left: 0;
     top: 100%;
-    background-color: #fff; 
+    background-color: #fff;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     }
@@ -216,8 +216,8 @@
         border-radius: 25px;
         margin: 40px 60px;
         padding: 0 15px 0 20px;
-        width: 697px; 
-        height: 49px; 
+        width: 697px;
+        height: 49px;
     }
 
     .search-input {
@@ -234,8 +234,8 @@
         background-color: #e60000;
         color: white;
         border-radius: 50%;
-        width: 40px; 
-        height: 40px; 
+        width: 40px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -243,30 +243,30 @@
     }
 
     .search-button img {
-        width: 20px; 
+        width: 20px;
     }
 
     .filter-button {
     border: none;
     background-color: #e60000;
     color: white;
-    border-radius: 50%; 
-    width: 40px; 
-    height: 40px; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer; 
-    margin-left: 10px; 
-    margin-right: 60px; 
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 60px;
     }
 
     .filter-button img {
-    width: 20px; 
+    width: 20px;
     }
 
     .filter-dropdown {
-    display: flex; 
+    display: flex;
     position: relative;
     z-index: 1;
     }
@@ -280,7 +280,7 @@
     }
 
     .filter-f-dropdown {
-    display: flex; 
+    display: flex;
     position: relative;
     z-index: 1;
     padding: 5px 10px;
@@ -289,7 +289,7 @@
     .slider {
     overflow: hidden;
     width: 100%;
-    max-width: 600px; 
+    max-width: 600px;
     margin: auto;
     }
 
@@ -305,11 +305,11 @@
 
     .recommendation-section {
     text-align: left;
-    margin: 20px 0; 
+    margin: 20px 0;
     }
 
     .recommendation-section h2 {
-    font-size: 24px; 
+    font-size: 24px;
     color: #000;
     margin-bottom: 10px;
     padding-left: 50px;
@@ -318,14 +318,14 @@
     .line {
     height: 2px;
     background-color: #545f71;
-    margin: 0 50px; 
+    margin: 0 50px;
     }
 
     .card-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 38px;
-    padding: 20px 50px; 
+    padding: 20px 50px;
     }
 
     .product-card {
@@ -365,7 +365,7 @@
     }
 
     footer h4, footer ul, footer p {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     }
 
     footer ul {
@@ -374,12 +374,12 @@
     }
 
     footer li {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     }
 
     footer img {
     vertical-align: middle;
-    margin-right: 10px; 
+    margin-right: 10px;
     }
     #default-carousel {
     z-index: 0;
@@ -427,6 +427,26 @@
     </button>
 </div>
 
+<div class="recommendation-section">
+    <h2>Promo</h2>
+    <div class="line"></div>
+</div>
+<div class="card-container">
+    @if (count($promos) > 0)
+        @foreach ($motors as $motor)
+            <!-- Card 1 -->
+            <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
+                <img src="{{ asset($motor->image.'.png') }}" alt="{{ $motor->image }}">
+                <div class="card-content">
+                    <h3>{{ $motor->name }}</h3>
+                    <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
+                </div>
+            </a>
+        @endforeach
+    @else
+        <p>Tidak ada promo motor untuk saat ini</p>
+    @endif
+</div>
 
 <!-- Rekomendasi Subtitle and Line -->
 <div class="recommendation-section">
@@ -449,7 +469,7 @@
             </a>
         @endforeach
     @else
-        <p>Tidak ada motor untuk saat ini</p>
+        <p>Tidak ada rekomendasi motor untuk saat ini</p>
     @endif
 </div>
 

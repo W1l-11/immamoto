@@ -289,19 +289,21 @@
 </div>
 <form action="{{ route('customer.payment') }}" method="POST">
     @csrf
+    <input type="hidden" name="dealer_id" value="{{ $motor->dealer_id }}">
+    <input type="hidden" name="motor_id" value="{{ $motor->id }}">
 
 <div class="deskripsi">
-  <div class="flex flex-col gap-2">
-        <pre class="font-bold text-lg">Merek Motor      : {{ $motor->merk }}</pre>
-        <pre class="font-bold text-lg">Nama Motor       : {{ $motor->name }}</pre>
-        <pre class="font-bold text-lg">Tahun Motor      : {{ $motor->released_year }}</pre>
-        <pre class="font-bold text-lg">Tipe             : {{ $motor->type }}</pre>
-        <pre class="font-bold text-lg">Lama Penggunaan  : {{ $motor->used_year }}</pre>
-        <pre class="font-bold text-lg">Deskripsi        : {{ $motor->description }}</pre>
+  <div class="flex flex-col gap-2 px-16">
+        <pre class="font-bold text-lg">Merek Motor        : {{ $motor->merk }}</pre>
+        <pre class="font-bold text-lg">Nama Motor         : {{ $motor->name }}</pre>
+        <pre class="font-bold text-lg">Tahun Motor        : {{ $motor->released_year }}</pre>
+        <pre class="font-bold text-lg">Tipe               : {{ $motor->type }}</pre>
+        <pre class="font-bold text-lg">Lama Penggunaan    : {{ $motor->used_year }}</pre>
+        <pre class="font-bold text-lg">Deskripsi          : {{ $motor->description }}</pre>
             <div class="flex flex-row gap-32 items-center">
             <label for="amount" class=" font-bold text-lg" >Jumlah</label>
             <input type="hidden" name="price" value="{{ $motor->price }}">
-            <input name="amount" type="number" value="1" class="font-bold text-2xl">
+            <input name="amount" type="number" value="1" class="font-bold text-2xl" min="1" max="{{ $motor->amount }}">
         </div>
 
   </div>
