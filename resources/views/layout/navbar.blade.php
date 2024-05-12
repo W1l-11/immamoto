@@ -23,7 +23,7 @@
 
     <nav role="navigation" class="primary-navigation">
         <ul>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="{{ route('customer.index') }}">Home</a></li>
             <li><a href="#">Kategori &dtrif;</a>
             <ul class="dropdown">
                 <li><a href="#">Super Bike</a></li>

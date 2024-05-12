@@ -80,4 +80,18 @@ class CustomerController extends Controller
     {
         return view('customer.history-details', compact('transaction'));
     }
+
+    public function searchIndex(Request $request)
+    {
+        $search = $request->search;
+
+        $motors = Motor::where('name', 'like', "%$search%")
+            ->orWhere('description', 'like', "%$search%")
+            ->orWhere('price', 'like', "%$search%")
+            ->orWhere('type', 'like', "%$search%")
+            ->orWhere('released_year', 'like', "%$search%")
+            ->orWhere('used_year', 'like', "%$search%")->get();
+
+        return view('customer.index', compact('search', 'motors'));
+    }
 }

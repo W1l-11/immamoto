@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/payment', [CustomerController::class, 'payment'])->name('.payment');
         Route::post('/confirm-payment', [CustomerController::class, 'confirmPayment'])->name('.confirm-payment');
         Route::get('/history', [CustomerController::class, 'history'])->name('.history');
+        Route::get('/search-index', [CustomerController::class, 'searchIndex'])->name('.search-index');
         Route::get('/history/{transaction}', [CustomerController::class, 'historyDetails'])->name('.history-details');
     });
 
