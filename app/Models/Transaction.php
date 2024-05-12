@@ -17,7 +17,8 @@ class Transaction extends Model
         'is_success',
         'payment_id',
         'datetime',
-        'total_payment'
+        'total_payment',
+        'amount'
     ];
 
     public $timestamps = false;

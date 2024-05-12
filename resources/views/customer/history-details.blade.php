@@ -292,7 +292,10 @@
     <div class="pembungkus px-12">
         <a id="card" href="cardview.php" class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 px-4 py-2">
           <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-48">
-            <img src="{{ asset('motor/'.$transaction->motor->image) }}" alt="">
+            @foreach (explode(',', $transaction->motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $image }}">
+                        @break
+                @endforeach
           </div>
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
@@ -315,7 +318,7 @@
             <pre class="font-bold text-lg">Tipe                   : {{ $transaction->motor->type }}</pre>
             <pre class="font-bold text-lg">Lama Penggunaan        : {{ $transaction->motor->used_year }}</pre>
             <pre class="font-bold text-lg">Deskripsi              : {{ $transaction->motor->description }}</pre>
-            <pre class="font-bold text-lg">Jumlah                 : {{ $transaction->motor->amount }}</pre>
+            <pre class="font-bold text-lg">Jumlah                 : {{ $transaction->amount }}</pre>
       </div>
     </div>
 
