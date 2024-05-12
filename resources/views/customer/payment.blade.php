@@ -269,6 +269,8 @@
         <input type="hidden" name="send_option_id" value="{{ $sendOptionId }}">
         <input type="hidden" name="payment_id" value="{{ $paymentId }}">
         <input type="hidden" name="motor_id" value="{{ $motorId }}">
+        <input type="hidden" name="amount" value="{{ $amount }}">
+        <input type="hidden" name="total_payment" value="{{ $totalPayment }}">
         <pre class="font-bold text-lg">Harga motor             : Rp {{number_format($price, 2, ',', '.') }}</pre>
         <pre class="font-bold text-lg">Pajak transfer          : Rp {{number_format($payment->fee, 2, ',', '.') }}</pre>
         <pre class="font-bold text-lg">Biaya pengiriman        : Rp {{number_format($sendOption->cost, 2, ',', '.') }}</pre>

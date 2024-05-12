@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('motor_id');
             $table->unsignedBigInteger('send_option_id');
+            $table->integer('total_payment');
             $table->boolean('is_success');
             $table->timestamp('datetime');
 

@@ -39,7 +39,7 @@
             </ul>
             </li>
             <li><a href="#">Lokasi</a></li>
-            <li><a href="#">Keranjang</a></li>
+            <li><a href="{{ route('customer.history') }}">Riwayat Pembelian</a></li>
         </ul>
     </nav>
 

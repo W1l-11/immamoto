@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/checkout/{motor}', [CustomerController::class, 'checkoutMotor'])->name('.checkout-motor');
         Route::post('/payment', [CustomerController::class, 'payment'])->name('.payment');
         Route::post('/confirm-payment', [CustomerController::class, 'confirmPayment'])->name('.confirm-payment');
+        Route::get('/history', [CustomerController::class, 'history'])->name('.history');
+        Route::get('/history/{transaction}', [CustomerController::class, 'historyDetails'])->name('.history-details');
     });
 
     Route::middleware(['check_login:dealer'])->prefix('/dealer')->name('dealer')->group(function () {

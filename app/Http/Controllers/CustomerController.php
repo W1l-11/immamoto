@@ -13,7 +13,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $motors = Motor::get();
+        $motors = Motor::where('amount', '>', 0)->get();
         $promos = Promo::get();
         return view('customer.index', compact('motors', 'promos'));
     }
@@ -44,7 +44,7 @@ class CustomerController extends Controller
         $paymentId = $payment->id;
         $totalPayment = ($price * $amount) + $sendOption->cost + $payment->fee;
 
-        return view('customer.payment', compact('sendOptionId', 'paymentId', 'motorId', 'dealerId', 'sendOption', 'payment', 'totalPayment', 'price'));
+        return view('customer.payment', compact('amount', 'sendOptionId', 'paymentId', 'motorId', 'dealerId', 'sendOption', 'payment', 'totalPayment', 'price'));
     }
 
     public function confirmPayment(Request $request)
@@ -56,11 +56,28 @@ class CustomerController extends Controller
             'send_option_id' => $request->send_option_id,
             'payment_id' => $request->payment_id,
             'is_success' => '1',
+            'total_payment' => $request->total_payment,
             'datetime' => now()->format('Y-m-d H:i:s')
         ]);
+
+        $motor = Motor::find($request->motor_id);
+        $motor['amount'] -= $request->amount;
+
+        $motor->save();
 
         alert('Pembayaran sukses', 'Pembayaranmu telah sukses', 'success');
 
         return redirect()->route('customer.index');
+    }
+
+    public function history()
+    {
+        $transactions = Transaction::where('customer_id', auth()->user()->id)->get();
+        return view('customer.history', compact('transactions'));
+    }
+
+    public function historyDetails(Transaction $transaction)
+    {
+        return view('customer.history-details', compact('transaction'));
     }
 }
