@@ -295,23 +295,26 @@
 
   <!--Carousel items-->
   <div
-    class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+  class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+
+  @foreach (explode(',', $motor->image) as $image)
     <!--First item-->
-    <div
-      class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-      data-twe-carousel-active
-      data-twe-carousel-item
-      style="backface-visibility: hidden">
-      <img
-        src="{{asset('r6.jpeg')}}"
-        class="block w-full object-scale-down"
-        alt="..." />
-      <div
-        class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
-        <h5 class="text-xl">Front Body</h5>
-      </div>
-    </div>
-    <!--Second item-->
+        <div
+        class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+        {{ $loop->iteration == 1 ? 'data-twe-carousel-active':'' }}
+        data-twe-carousel-item
+        style="backface-visibility: hidden">
+        <img
+            src="{{asset('motor/'.$image)}}"
+            class="block w-full object-scale-down"
+            alt="{{ $image }}" />
+            {{-- <div
+                class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
+                <h5 class="text-xl">Front Body</h5>
+            </div> --}}
+        </div>
+    @endforeach
+    {{-- <!--Second item-->
     <div
       class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
       data-twe-carousel-item
@@ -337,7 +340,7 @@
       <div
         class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
         <h5 class="text-xl">Side Body</h5>
-      </div>
+      </div>--}}
     </div>
   </div>
 
@@ -397,6 +400,7 @@
 <div class="deskripsi flex flex-row justify-between">
   <div class="deskripsi-kiri">
   <div class="flex flex-col px-20 py-24 gap-2">
+
         <pre class="font-bold text-lg">Merek Motor      : {{ $motor->merk }}</pre>
         <pre class="font-bold text-lg">Nama Motor       : {{ $motor->name }}</pre>
         <pre class="font-bold text-lg">Tahun Motor      : {{ $motor->released_year }}</pre>
@@ -426,8 +430,8 @@
         <!-- card footer -->
         <div class="p-8 bg-white border-gray-200 text-center">
             <!-- button link -->
-            <a class="bg-red-500 shadow-md text-sm text-white font-bold py-3 md:px-28 px-4 hover:bg-red-400 rounded-full uppercase"
-                href="{{route('customer.checkout-motor', $motor->id)}}">Checkout</a>
+            <a class="bg-red-500 shadow-md text-sm text-white font-bold py-3 md:px-28 px-10 hover:bg-red-400 rounded-full uppercase"
+                href="{{route('customer.checkout-motor', $motor->id)}}">Beli    </a>
         </div>
     </div>
 </div>

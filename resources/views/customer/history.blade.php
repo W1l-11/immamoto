@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout.app')
 
-        <title>@yield('title') | {{ config('app.name') }}</title>
+@section('title', 'Riwayat Pembelian')
+
+@section('content')
+
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      fontFamily: {
+        sans: ["Roboto", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
+        mono: ["ui-monospace", "monospace"],
+      },
+    },
+    corePlugins: {
+      preflight: false,
+    },
+  };
+</script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>index</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        {{-- <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
-        rel="stylesheet" /> --}}
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-        <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/tw-elements/css/tw-elements.min.css" />
-        {{-- <script src="https://cdn.tailwindcss.com/3.3.0"></script> --}}
-        <link rel="stylesheet" href="">
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @vite('resources/css/app.css')
         <style>
             body {
                 padding: 0;
@@ -64,9 +70,6 @@
             }
 
             .btn-jual {
-                display: flex;
-                justify-items: center;
-                align-content: center;
                 background-color: #e60000;
                 border: 2px solid #545f71;
                 color: #ffffff;
@@ -229,155 +232,6 @@
 
             }
 
-            .search-bar {
-                display: flex;
-                align-items: center;
-                background-color: #ffffff;
-                border: 1px solid #545f71;
-                border-radius: 25px;
-                margin: 40px 60px;
-                padding: 0 15px 0 20px;
-                width: 697px;
-                height: 49px;
-            }
-
-            .search-input {
-                flex: 1;
-                border: none;
-                outline: none;
-                background: none;
-                padding: 10px;
-                font-size: 16px;
-            }
-
-            .search-button {
-                border: none;
-                background-color: #e60000;
-                color: white;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-left: 10px;
-            }
-
-            .search-button img {
-                width: 20px;
-            }
-
-            .filter-button {
-            border: none;
-            background-color: #e60000;
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            margin-left: 10px;
-            margin-right: 60px;
-            }
-
-            .filter-button img {
-            width: 20px;
-            }
-
-            .filter-dropdown {
-            display: flex;
-            position: relative;
-            z-index: 1;
-            }
-
-            .filter-dropdown {
-            padding: 5px 10px;
-            }
-
-            .filter-dropdown input[type="checkbox"] {
-            margin-right: 10px;
-            }
-
-            .filter-f-dropdown {
-            display: flex;
-            position: relative;
-            z-index: 1;
-            padding: 5px 10px;
-            }
-
-            .slider {
-            overflow: hidden;
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-            }
-
-            .slides {
-            display: flex;
-            transition: transform 2s ease;
-            }
-
-            .slides img {
-            width: 100%;
-            flex: 0 0 auto;
-            }
-
-            .recommendation-section {
-            text-align: left;
-            margin: 20px 0;
-            }
-
-            .recommendation-section h2 {
-            font-size: 24px;
-            color: #000;
-            margin-bottom: 10px;
-            padding-left: 50px;
-            }
-
-            .line {
-            height: 2px;
-            background-color: #545f71;
-            margin: 0 50px;
-            }
-
-            .card-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 38px;
-            padding: 20px 50px;
-            }
-
-            .product-card {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-            }
-
-            .product-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            }
-
-            .card-content {
-            padding: 15px;
-            text-align: center;
-            }
-
-            .card-content h3 {
-            margin: 10px 0;
-            font-size: 1.1em;
-            }
-
-            .card-content p {
-            margin: 0;
-            font-weight: bold;
-            color: #545f71;
-            }
-
             footer {
             background-color: #6f1919;
             color: white;
@@ -402,29 +256,114 @@
             vertical-align: middle;
             margin-right: 10px;
             }
+
+            #carouselExampleCaptions img {
+            width: 1230px;
+            height: 375px;
+            object-fit: fill;
+            }
+
+            #carouselExampleCaptions {
+            display: flex;
+            justify-content: center; /* Centers the content horizontally */
+            }
+
         </style>
     </head>
     <body>
-        @once
-        @unless (request()->is('register') || request()->is('login'))
-        @include('layout.navbar')
-        @endunless
-        @endonce
 
-        <main>
-            @include('sweetalert::alert')
-            @yield('content')
-        </main>
+{{-- <!-- Content decide -->
+<div class="content-button flex flex-row justify-around">
+  <div class="left-button w-full">
+    <button class="w-full hover:bg-gray-300 py-3" style="border-right: 2px solid #000;">
+      <a href="pesanan.php" class="font-bold">Keranjang</a>
+    </button>
+  </div>
+  <div class="right-button w-full">
+    <button class="w-full hover:bg-gray-300 py-3">
+      <a href="riwayat.php" class="font-bold">Riwayat</a>
+    </button>
+  </div>
+</div> --}}
 
-        @once
-        @unless (request()->is('register') || request()->is('login'))
-                @include('layout.footer')
-            @endunless
-        @endonce
-        <script src="main.js"></script>
+<br>
+<br>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/js/tw-elements.umd.min.js"></script>
-    </body>
-</html>
+@if (count($transactions) > 0)
+<div class="bungkusan grid grid-cols-4 gap-5  px-12">
+    @foreach ($transactions as $transaction)
+            <a href="{{ route('customer.history-details', $transaction->id) }}" class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 px-4">
+            <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-60">
+                {{-- <div class="check flex flex-row-reverse px-4 py-2">
+                <input type="checkbox">
+                </div> --}}
+                @foreach (explode(',', $transaction->motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $image }}">
+                        @break
+                @endforeach
+            </div>
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-2">
+                <p class="block font-sans text-xl antialiased font-medium leading-relaxed text-blue-gray-900">
+                    Rp {{ number_format($transaction->total_payment, 2, ',', '.') }}
+                </p>
+                </div>
+                <p class="block font-sans text-lg antialiased font-normal leading-normal text-gray-700 opacity-75">
+                    {{ $transaction->motor->name }}
+                </p>
+            </div>
+        <div class="p-6 pt-0">
+
+
+
+            {{--
+                <form class="max-w-xs mx-auto flex justify-center">
+    <div class="relative flex items-center max-w-[8rem]">
+        <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-red-600 dark:border-gray-600 hover:text-white hover:bg-red-500 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+            <svg class="w-3 h-3 text-white-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+            </svg>
+        </button>
+        <input type="text" id="quantity-input" data-input-counter aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required />
+        <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-red-600 dark:border-gray-600 hover:text-white hover:bg-red-500 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+            <svg class="w-3 h-3 text-white-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+            </svg>
+        </button>
+    </div>
+</form> --}}
+
+</div>
+</a>
+
+@endforeach
+<!-- Card -->
+@else
+<p>Belum ada transaksi motor untuk saat ini</p>
+@endif
+</div>
+
+{{-- <!-- Checkout bar -->
+
+<div class="checkout-bar flex justify-between border-2 rounded-full">
+  <div class="kiri flex flex-row items-center justify-center w-96">
+    <input type="checkbox">
+    <p class="text-base font-bold px-3">Semua</p>
+  </div>
+  <div class="tengah flex flex-col py-4">
+    <p class="font-bold text-lg">Total : </p>
+    <p class="font-bold text-lg">Hemat : </p>
+  </div>
+  <div class="kanan flex items-center justify-center bg-red-600 w-96 rounded-r-full">
+    <a href="timer_payment.php" class="h-full flex items-center">
+      <button class="font-bold text-lg text-white">Checkout</button>
+    </a>
+  </div>
+</div> --}}
+
+<br><br><br><br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/js/tw-elements.umd.min.js"></script>
+@endsection

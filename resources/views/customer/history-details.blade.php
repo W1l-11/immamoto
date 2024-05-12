@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Checkout')
+@section('title', 'History')
 
 @section('content')
 
@@ -278,38 +278,49 @@
 
     </style>
 
-<h2 class="px-14 py-8 font-bold text-2xl">Checkout {{ $motor->name }}</h2>
+<div class="flex flex-row w-full justify-between">
+    <h2 class="px-14 py-8 font-bold text-2xl">Riwayat Pembelian</h2>
+    <button onclick="history.back()" class="btn btn-danger">Kembali</button>
+
+</div>
 
 <br>
 
 <!-- Riwayat atas -->
 <!-- Card -->
-
-
-</div>
-<form action="{{ route('customer.payment') }}" method="POST">
-    @csrf
-    <input type="hidden" name="dealer_id" value="{{ $motor->dealer_id }}">
-    <input type="hidden" name="motor_id" value="{{ $motor->id }}">
-
-<div class="deskripsi">
-  <div class="flex flex-col gap-2 px-16">
-        <pre class="font-bold text-lg">Merek Motor        : {{ $motor->merk }}</pre>
-        <pre class="font-bold text-lg">Nama Motor         : {{ $motor->name }}</pre>
-        <pre class="font-bold text-lg">Tahun Motor        : {{ $motor->released_year }}</pre>
-        <pre class="font-bold text-lg">Tipe               : {{ $motor->type }}</pre>
-        <pre class="font-bold text-lg">Lama Penggunaan    : {{ $motor->used_year }}</pre>
-        <pre class="font-bold text-lg">Deskripsi          : {{ $motor->description }}</pre>
-            <div class="flex flex-row gap-32 items-center">
-            <label for="amount" class=" font-bold text-lg" >Jumlah</label>
-            <input type="hidden" name="price" value="{{ $motor->price }}">
-            <input name="amount" type="number" value="1" class="font-bold text-2xl" min="1" max="{{ $motor->amount }}">
+<div class="flex flex-row">
+    <div class="pembungkus px-12">
+        <a id="card" href="cardview.php" class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 px-4 py-2">
+          <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-48">
+            <img src="{{ asset('motor/'.$transaction->motor->image) }}" alt="">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <p class="block font-sans text-xl antialiased font-medium leading-relaxed text-blue-gray-900">
+                Rp {{ number_format($transaction->motor->price, 2, ',', '.') }}
+              </p>
+            </div>
+            <p class="block font-sans text-lg antialiased font-normal leading-normal text-gray-700 opacity-75">
+                {{ $transaction->motor->name }}
+            </p>
+          </div>
+          <div class="p-6 pt-0"></div>
+        </a>
         </div>
+    <div class="deskripsi">
+      <div class="flex flex-col gap-2 px-16">
+            <pre class="font-bold text-lg">Merek Motor            : {{ $transaction->motor->merk }}</pre>
+            <pre class="font-bold text-lg">Merek Motor            : {{ $transaction->motor->name }}</pre>
+            <pre class="font-bold text-lg">Tahun Motor            : {{ $transaction->motor->released_year }}</pre>
+            <pre class="font-bold text-lg">Tipe                   : {{ $transaction->motor->type }}</pre>
+            <pre class="font-bold text-lg">Lama Penggunaan        : {{ $transaction->motor->used_year }}</pre>
+            <pre class="font-bold text-lg">Deskripsi              : {{ $transaction->motor->description }}</pre>
+            <pre class="font-bold text-lg">Jumlah                 : {{ $transaction->motor->amount }}</pre>
+      </div>
+    </div>
 
-  </div>
 </div>
 </div>
-
 <br>
 <br>
 <br>
@@ -318,31 +329,25 @@
 <div class="Deskripsi_akhir px-16">
 <div class="deskripsi_bawah">
   <div class="flex flex-col gap-2">
-        <label for="username">Nama penerima</label>
-        <input type="text" value="{{ auth()->user()->name }}" name="name" class="font-bold text-lg">
-        <label for="address">Alamat pengiriman</label>
-        <input type="text" value="{{ auth()->user()->address }}" name="address" class="font-bold text-lg">
-        <label for="send_option">Opsi pengiriman</label>
-        <select value="{{ auth()->user()->address }}" name="send_option" required class="font-bold text-lg">
-            <option value="">Pilih opsi pengiriman</option>
-            @foreach ($sendOptions as $sendOption)
-                <option value="{{ $sendOption->id }}">{{ $sendOption->name }}</option>
-            @endforeach
-        </select>
+        <pre class="font-bold text-lg">Nama penerima          : {{ App\Models\User::find($transaction->customer_id)->name }}</pre>
+        <pre class="font-bold text-lg">Alamat pengiriman      : {{ App\Models\User::find($transaction->customer_id)->name }}</pre>
+        <pre class="font-bold text-lg">Opsi pengiriman        : {{ App\Models\SendOption::find($transaction->send_option_id)->name }}</pre>
+        <pre class="font-bold text-lg">Pembayaran             : {{ App\Models\Payment::find($transaction->payment_id)->name }}</pre>
   </div>
 </div>
 <br>
-{{-- <div class="deskripsi_bawah_lanjutan">
+<div class="judul">
+  <p class="font-bold text-2xl">Rincian Pembayaran</p>
+</div> <br>
+<div class="deskripsi_bawah_lanjutan">
   <div class="flex flex-col gap-2">
-        <p class="font-bold text-lg">Subtotal :      </p>
-        <pre class="font-bold text-lg">Biaya Pengiriman : </pre>
-        <pre class="font-bold text-lg">Potongan Harga   : </pre>
-        <pre class="font-bold text-lg">Total Harga      : </pre>
+        <pre class="font-bold text-lg">Biaya Pengiriman       : Rp {{ number_format(App\Models\SendOption::find($transaction->send_option_id)->cost, 2, ',', '.') }}</pre>
+        <pre class="font-bold text-lg">Pajak Pembelian        : Rp {{ number_format(App\Models\Payment::find($transaction->payment_id)->fee, 2, ',', '.') }}</pre>
+        <pre class="font-bold text-lg">Total Harga            : Rp {{ number_format($transaction->total_payment, 2, ',', '.') }}</pre>
   </div>
-</div> --}}
-{{-- <div class="judul">
-  <p class="font-bold text-3xl">Rincian Pembayaran</p>
-</div> --}}
+</div>
+<br><br>
+{{--
 </div>
 
 <br>
@@ -354,13 +359,11 @@
                 <p class="font-bold text-2xl">Pembayaran Melalui Virtual Account</p>
                 <div class="isi_card flex flex-row justify-between items-center">
                     <div class="payment_option py-8 px-4 gap-2">
-                        @foreach ($payments as $payment)
-                            <div class="flex flex-row items-center gap-2">
-                                <input type="radio" value="{{ $payment->id }}" required name="payment_method">
-                                <img src="{{asset($payment->name.'.png')}}" alt="" class="w-24 px-4 object-scale-down">
-                                <p class="font-bold text-base">{{ $payment->name }}</p>
-                            </div>
-                        @endforeach
+                        <div class="flex flex-row items-center gap-2">
+                            <input type="radio" value="{{ $payment->id }}" required name="payment_method">
+                            <img src="{{asset($payment->name.'.png')}}" alt="" class="w-24 px-4 object-scale-down">
+                            <p class="font-bold text-base">{{ $payment->name }}</p>
+                        </div>
                         {{-- <div class="mandiri flex flex-row items-center gap-2">
                             <input type="radio" name="payment_method">
                             <img src="{{asset('mandiri.png')}}" alt="" class="w-24 px-4 object-scale-down">
@@ -377,7 +380,7 @@
                             <p class="font-bold text-base">Bank BRI</p>
                         </div> --}}
                     </div>
-                    <div class="deskripsi_kanan">
+                    {{-- <div class="deskripsi_kanan">
                         <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-[40rem] h-[16rem]">
                             <div class="p-6">
                                 <h5 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -394,7 +397,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -417,9 +420,9 @@
         Checkout
     </button>
 </div> --}}
-<button type="submit" class="checkout-bar border-2 h-20 w-full font-bold text-lg text-white kanan flex items-center justify-center bg-red-600 rounded-full">
+{{-- <button type="submit" class="checkout-bar border-2 h-20 w-full font-bold text-lg text-white kanan flex items-center justify-center bg-red-600 rounded-full">
     Checkout
-</button>
+</button> --}}
 </form>
 
 

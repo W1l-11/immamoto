@@ -1,433 +1,446 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Immamoto</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            body {
-                padding: 0;
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-
-            .navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: white;
-                padding: 10px;
-            }
-
-            .navbar-logo {
-                margin-left: 50px;
-            }
-
-            .navbar-buttons {
-                margin-right: 20px;
-            }
-
-            .btn {
-                padding: 8px 29px;
-                margin: 0 10px;
-                border: none;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                border-radius: 45px;
-                color: #ffffff;
-            }
-
-            .btn-daftar {
-                background-color: #ffffff;
-                border: 2px solid #545f71;
-                color: #545f71;
-            }
-
-            .btn-daftar:hover {
-                background-color: #e60000;
-                color: #ffffff;
-            }
-
-            .btn-masuk {
-                background-color: #e60000;
-                border: 2px solid #545f71;
-                margin-right: 50px;
-            }
-
-            .btn-masuk:hover {
-                background-color: #ffffff;
-                color: #545f71;
-            }
-
-            .btn-jual {
-                background-color: #e60000;
-                border: 2px solid #545f71;
-                color: #ffffff;
-                position: relative;
-                padding-left: 60px;
-                padding-right: -20px;
-                transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-            }
-
-            .btn-jual::before {
-                content: "+";
-                position: absolute;
-                left: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                background-color: transparent;
-                color: #ffffff;
-                width: 25px;
-                height: 25px;
-                text-align: center;
-                line-height: 25px;
-                border-radius: 50%;
-                font-size: 35px;
-            }
-
-            .btn-jual:hover {
-                background-color: #ffffff;
-                border-color: #545f71;
-                color: #545f71;
-            }
-
-            .btn-jual:hover::before {
-                color: #545f71;
-            }
-
-            nav {
-            &.primary-navigation {
-            margin: 0 auto;
-            display: block;
-
-            padding: 5px 0 0 0;
-            text-align: center;
-            font-size: 16px;
-
-            ul li {
-            list-style: none;
-            margin: 0 auto;
-            display: inline-block;
-            padding: 0 30px;
-            position: relative;
-            text-decoration: none;
-            text-align: center;
-            font-family: arvo;
-            }
-
-            li a {
-            color: black;
-            }
-
-            li a:hover {
-            color: #e60000;
-            }
-
-            li:hover {
-            cursor: pointer;
-            }
-
-            ul li ul {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            padding-left: 0;
-            left: 0;
-            display: none;
-            background: white;
-            }
-
-            ul li:hover > ul,
-            ul li ul:hover {
-            visibility: visible;
-            opacity: 1;
-            display: block;
-            min-width: 250px;
-            text-align: left;
-            padding-top: 20px;
-            box-shadow: 0px 3px 5px -1px #ccc;
-            }
-
-            ul li ul li {
-            clear: both;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 20px;
-            border-style: none;
-            }
-
-            ul li ul li a:hover {
-            padding-left: 10px;
-            border-left: 2px solid #e60000;
-            transition: all 0.3s ease;
-            }
-            }
-            }
-
-            a {
-
-            text-decoration: none;
-
-            &:hover {
-                color: #3CA0E7;
-            }
-
-            }
-
-            ul li ul li a { transition: all 0.5s ease; }
-
-            .primary-navigation ul {
-            display: flex;
-            justify-content: space-around;
-            padding: 7px 0;
-            list-style: none;
-            border: 1px solid #545f71;
-            }
-
-            .primary-navigation li {
-            position: relative;
-            }
-
-            .primary-navigation li a {
-            display: block;
-            padding: 10px;
-            color: #000;
-            text-decoration: none;
-            }
-            .primary-navigation li:hover > a {
-            background-color: #f0f0f0;
-            color: #545f71;
-            }
-
-
-            .primary-navigation li ul {
-            display: none;
-            position: absolute;
-            left: 0;
-            top: 100%;
-            background-color: #fff;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            }
-
-            .primary-navigation li:hover ul {
-            display: block;
-            background-color: #f0f0f0;
-            }
-
-            .search-filter-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            }
-
-            .search-bar {
-                display: flex;
-                align-items: center;
-                background-color: #ffffff;
-                border: 1px solid #545f71;
-                border-radius: 25px;
-                margin: 40px 60px;
-                padding: 0 15px 0 20px;
-                width: 697px;
-                height: 49px;
-            }
-
-            .search-input {
-                flex: 1;
-                border: none;
-                outline: none;
-                background: none;
-                padding: 10px;
-                font-size: 16px;
-            }
-
-            .search-button {
-                border: none;
-                background-color: #e60000;
-                color: white;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-left: 10px;
-            }
-
-            .search-button img {
-                width: 20px;
-            }
-
-            .filter-button {
-            border: none;
-            background-color: #e60000;
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            margin-left: 10px;
-            margin-right: 60px;
-            }
-
-            .filter-button img {
-            width: 20px;
-            }
-
-            .filter-dropdown {
-            display: flex;
-            position: relative;
-            z-index: 10;
-            }
-
-            .filter-dropdown {
-            padding: 5px 10px;
-            }
-
-            .filter-dropdown input[type="checkbox"] {
-            margin-right: 10px;
-            }
-
-            .filter-f-dropdown {
-            display: flex;
-            position: relative;
-            z-index: 10;
-            padding: 5px 10px;
-            }
-
-            .slider {
-            overflow: hidden;
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-            }
-
-            .slides {
-            display: flex;
-            transition: transform 2s ease;
-            }
-
-            .slides img {
-            width: 100%;
-            flex: 0 0 auto;
-            }
-            .recommendation-section {
-            text-align: left;
-            margin: 20px 0;
-            }
-
-            .recommendation-section h2 {
-            font-size: 24px;
-            color: #000;
-            margin-bottom: 10px;
-            padding-left: 50px;
-            }
-
-            .line {
-            height: 2px;
-            background-color: #545f71;
-            margin: 0 50px;
-            }
-
-            .card-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 38px;
-            padding: 20px 50px;
-            }
-
-            .product-card {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-            }
-
-            .product-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            }
-
-            .card-content {
-            padding: 15px;
-            text-align: center;
-            }
-
-            .card-content h3 {
-            margin: 10px 0;
-            font-size: 1.1em;
-            }
-
-            .card-content p {
-            margin: 0;
-            font-weight: bold;
-            color: #545f71;
-            }
-
-            footer {
-            background-color: #6f1919;
-            color: white;
-            text-align: center;
-            padding: 40px;
-            }
-
-            footer h4, footer ul, footer p {
-            margin-bottom: 20px;
-            }
-
-            footer ul {
-            padding-left: 0;
-            list-style-type: none;
-            }
-
-            footer li {
-            margin-bottom: 10px;
-            }
-
-            footer img {
-            vertical-align: middle;
-            margin-right: 10px;
-            }
-        </style>
-          @vite('resources/css/app.css')
-    </head>
-    <body>
-
-        @once
-            @include('layout.navbar')
-        @endonce
-
-
-    <!-- Image Slider -->
-
-
-
+@extends('layout.app')
+
+@section('title', 'Customer')
+
+@section('content')
+
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        padding: 10px;
+    }
+
+    .navbar-logo {
+        margin-left: 50px;
+    }
+
+    .navbar-buttons {
+        margin-right: 20px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        height: 45px;
+    }
+
+    img .btn-profile{
+    width: 45px;
+    height: 45px;
+    }
+
+    .btn {
+        padding: 8px 29px;
+        margin: 0 10px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 45px;
+        color: #ffffff;
+    }
+
+    .btn-jual {
+        background-color: #e60000;
+        border: 2px solid #545f71;
+        color: #ffffff;
+        position: relative;
+        padding-left: 60px;
+        padding-right: -20px;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    .btn-jual::before {
+        content: "+";
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        color: #ffffff;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 50%;
+        font-size: 35px;
+    }
+
+    .btn-jual:hover {
+        background-color: #ffffff;
+        border-color: #545f71;
+        color: #545f71;
+    }
+
+    .btn-jual:hover::before {
+        color: #545f71;
+    }
+
+    nav {
+    &.primary-navigation {
+    margin: 0 auto;
+    display: block;
+
+    padding: 5px 0 0 0;
+    text-align: center;
+    font-size: 16px;
+
+    ul li {
+    list-style: none;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 0 30px;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    font-family: arvo;
+    }
+
+    li a {
+    color: black;
+    }
+
+    li a:hover {
+    color: #e60000;
+    }
+
+    li:hover {
+    cursor: pointer;
+    }
+
+    ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    padding-left: 0;
+    left: 0;
+    display: none;
+    background: white;
+    }
+
+    ul li:hover > ul,
+    ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    min-width: 250px;
+    text-align: left;
+    padding-top: 20px;
+    box-shadow: 0px 3px 5px -1px #ccc;
+    }
+
+    ul li ul li {
+    clear: both;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+    border-style: none;
+    }
+
+    ul li ul li a:hover {
+    padding-left: 10px;
+    border-left: 2px solid #e60000;
+    transition: all 0.3s ease;
+    }
+    }
+    }
+
+    a {
+
+    text-decoration: none;
+
+    &:hover {
+        color: #3CA0E7;
+    }
+
+    }
+
+    ul li ul li a { transition: all 0.5s ease; }
+
+    .primary-navigation ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 7px 0;
+    list-style: none;
+    border: 1px solid #545f71;
+    }
+
+    .primary-navigation li {
+    position: relative;
+    }
+
+    .primary-navigation li a {
+    display: block;
+    padding: 10px;
+    color: #000;
+    text-decoration: none;
+    }
+    .primary-navigation li:hover > a {
+    background-color: #f0f0f0;
+    color: #545f71;
+    }
+
+
+    .primary-navigation li ul {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    }
+
+    .primary-navigation li:hover ul {
+    display: block;
+    background-color: #f0f0f0;
+    }
+
+    .search-filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #545f71;
+        border-radius: 25px;
+        margin: 40px 60px;
+        padding: 0 15px 0 20px;
+        width: 697px;
+        height: 49px;
+    }
+
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: none;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .search-button {
+        border: none;
+        background-color: #e60000;
+        color: white;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-button img {
+        width: 20px;
+    }
+
+    .filter-button {
+    border: none;
+    background-color: #e60000;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 60px;
+    }
+
+    .filter-button img {
+    width: 20px;
+    }
+
+    .filter-dropdown {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    }
+
+    .filter-dropdown {
+    padding: 5px 10px;
+    }
+
+    .filter-dropdown input[type="checkbox"] {
+    margin-right: 10px;
+    }
+
+    .filter-f-dropdown {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    padding: 5px 10px;
+    }
+
+    .slider {
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    }
+
+    .slides {
+    display: flex;
+    transition: transform 2s ease;
+    }
+
+    .slides img {
+    width: 100%;
+    flex: 0 0 auto;
+    }
+
+    .recommendation-section {
+    text-align: left;
+    margin: 20px 0;
+    }
+
+    .recommendation-section h2 {
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 10px;
+    padding-left: 50px;
+    }
+
+    .line {
+    height: 2px;
+    background-color: #545f71;
+    margin: 0 50px;
+    }
+
+    .card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 38px;
+    padding: 20px 50px;
+    }
+
+    .product-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    }
+
+    .card-content {
+    padding: 15px;
+    text-align: center;
+    }
+
+    .card-content h3 {
+    margin: 10px 0;
+    font-size: 1.1em;
+    }
+
+    .card-content p {
+    margin: 0;
+    font-weight: bold;
+    color: #545f71;
+    }
+
+    footer {
+    background-color: #6f1919;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    }
+
+    footer h4, footer ul, footer p {
+    margin-bottom: 20px;
+    }
+
+    footer ul {
+    padding-left: 0;
+    list-style-type: none;
+    }
+
+    footer li {
+    margin-bottom: 10px;
+    }
+
+    footer img {
+    vertical-align: middle;
+    margin-right: 10px;
+    }
+    #default-carousel {
+    z-index: 0;
+}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+<!-- Search and Filter Container -->
+<div class="search-filter-container">
+    <form action="{{ route('customer.search-index') }}" method="GET">
+    <div class="search-bar">
+            <input type="text" name="search" placeholder="Search" class="search-input">
+            <button class="search-button"><img src="{{ asset('search.png') }}" alt="Search"></button>
+        </div>
+    </form>
+
+</div>
+
+@if (isset($search))
+    <div class="recommendation-section">
+        <div class="flex flex-row items-center px-16">
+            <button class="px-4 py-2 bg-red-500 m-2 rounded-full text-white" onclick="history.back()">Kembali</button>
+            <h2>Pencarian {{ $search }}</h2>
+        </div>
+    <div class="line"></div>
+    @if (count($motors) > 0)
+        @foreach ($motors as $motor)
+        <!-- Card 1 -->
+        <div class="card-container">
+        <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
+            @foreach (explode(',', $motor->image) as $image)
+                <img src="{{ asset('motor/'.$image) }}" alt="{{ $motor->image }}">
+                @break
+            @endforeach
+            <div class="card-content">
+                <h3>{{ $motor->name }}</h3>
+                <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
+            </div>
+        </a>
+        </div>
+        @endforeach
+    @else
+    <br>
+        <p class="px-12">Tidak ditemukan {{ $search }}</p>
+    @endif
+@else
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-             <!-- Item 1 -->
+            <!-- Item 1 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('cbr250rr.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('motorex.jpg') }}" class="object-scale-down absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('r6.jpeg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('motorex2.jpg') }}" class="object-scale-down absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="{{ asset('zx25r.png') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <img src="{{ asset('motorex2.webp') }}" class="object-scale-down absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
         </div>
         <!-- Slider indicators -->
@@ -454,7 +467,29 @@
             </span>
         </button>
     </div>
-
+    <div class="recommendation-section">
+        <h2>Promo</h2>
+        <div class="line"></div>
+    </div>
+    <div class="card-container">
+        @if (count($promos) > 0)
+            @foreach ($motors as $motor)
+                <!-- Card 1 -->
+                <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
+                    @foreach (explode(',', $motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $motor->image }}">
+                        @break
+                    @endforeach
+                    <div class="card-content">
+                        <h3>{{ $motor->name }}</h3>
+                        <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
+                    </div>
+                </a>
+            @endforeach
+        @else
+            <p>Tidak ada promo motor untuk saat ini</p>
+        @endif
+    </div>
 
     <!-- Rekomendasi Subtitle and Line -->
     <div class="recommendation-section">
@@ -465,117 +500,30 @@
     <!-- Card motor -->
 
     <div class="card-container">
-        <!-- Card 1 -->
-        <div class="pembungkus px-12">
-    <a id="card" href="riwayatdetail.php" class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 px-4 py-2">
-      <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-48">
-        <img src="{{ asset('zx25r.png') }}" alt="">
-      </div>
-      <div class="p-6">
-        <div class="flex items-center justify-between mb-2">
-          <p class="block font-sans text-xl antialiased font-medium leading-relaxed text-blue-gray-900">
-            Rp
-          </p>
-        </div>
-        <p class="block font-sans text-lg antialiased font-normal leading-normal text-gray-700 opacity-75">
-          Kawasaki ZX-25R
-        </p>
-      </div>
-      <div class="p-6 pt-0">
-        </div>
-    </a>
-      </div>
+        @if (count($motors) > 0)
+            @foreach ($motors as $motor)
+                <!-- Card 1 -->
+                <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
+                    @foreach (explode(',', $motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $motor->image }}">
+                        @break
+                    @endforeach
+                    <div class="card-content">
+                        <h3>{{ $motor->name }}</h3>
+                        <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
+                    </div>
+                </a>
+            @endforeach
+        @else
+            <p>Tidak ada rekomendasi motor untuk saat ini</p>
+        @endif
     </div>
-    </div>
+@endif
 
-    <!-- Footer -->
-    <footer style="background-color: #6f1919; color: white; text-align: center; padding: 20px;">
-        <div style="display: flex; justify-content: space-between;">
-            <div style="flex-basis: 20%;">
-                <h4>IMMAMOTO</h4>
-                <ul style="list-style-type: none; padding-left: 0;">
-                    <li>Our Team</li>
-                    <li>Contact Support</li>
-                </ul>
-            </div>
-            <div style="flex-basis: 20%;">
-                <h4>Kategori Populer</h4>
-                <ul style="list-style-type: none; padding-left: 0;">
-                    <li>Motor Sport</li>
-                    <li>Super Bike</li>
-                    <li>Naked Bike</li>
-                    <li>Normal Bike</li>
-                </ul>
-            </div>
-            <div style="flex-basis: 20%;">
-                <h4>Hubungi Kami</h4>
-                <ul style="list-style-type: none; padding-left: 0;">
-                    <li>0812-3278-6221</li>
-                </ul>
-            </div>
-            <div style="flex-basis: 20%;">
-                <h4>Media Sosial</h4>
-                <ul style="list-style-type: none; padding-left: 0;">
-                    <li><img src="{{ asset('instagram.png') }}" alt="">@immamoto</li>
-                    <li><img src="{{ asset('facebook (1).png') }}" alt="">@immamoto</li>
-                    <li><img src="{{ asset('twitter.png') }}" alt="">@immamoto</li>
-                </ul>
-            </div>
-        </div>
-        <p>&copy; 2024 ImmaMoto. All Rights Reserved.</p>
-    </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <script>
-        // Dropdown - filter
 
-        document.addEventListener('DOMContentLoaded', function () {
-        var filterButton = document.querySelector('.filter-button');
-        var filterDropdown = document.querySelector('.filter-dropdown');
-        filterButton.addEventListener('click', function() {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="main.js"></script>
 
-            if (filterDropdown.style.display === "none" || !filterDropdown.style.display) {
-                filterDropdown.style.display = "block";
-            } else {
-                filterDropdown.style.display = "none";
-            }
-        });
-        });
 
-        document.addEventListener('DOMContentLoaded', function () {
-        var filterfButton = document.querySelector('.filter-f-button');
-        var filterfDropdown = document.querySelector('.filter-f-dropdown');
-        filterfButton.addEventListener('click', function() {
-
-            if (filterfDropdown.style.display === "none" || !filterfDropdown.style.display) {
-                filterfDropdown.style.display = "block";
-            } else {
-                filterfDropdown.style.display = "none";
-            }
-        });
-        });
-
-        // Slider
-
-        document.addEventListener('DOMContentLoaded', function () {
-        var slides = document.querySelector('.slides');
-        var slideIndex = 0;
-        var slideCount = slides.children.length;
-
-        function nextSlide() {
-            slideIndex++;
-            if (slideIndex >= slideCount) {
-            slideIndex = 0;
-            }
-            updateSlidePosition();
-        }
-
-        function updateSlidePosition() {
-            slides.style.transform = 'translateX(-' + (slideIndex * 100) + '%)';
-        }
-
-        setInterval(nextSlide, 7000);
-        });
-    </script>
-    </body>
-</html>
+@endsection

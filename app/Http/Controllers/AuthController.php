@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,15 +31,15 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             if ($user->user_type == 'customer') {
-                Alert::alert('Berhasil Login', 'Login Sebagai Customer', 'success');
+                alert('Berhasil Login', 'Login Sebagai Customer', 'success');
                 return redirect('customer');
             } elseif ($user->user_type == 'dealer') {
-                Alert::alert('Berhasil Login', 'Login Sebagai Dealer', 'success');
+                alert('Berhasil Login', 'Login Sebagai Dealer', 'success');
                 return redirect('dealer');
             }
         }
 
-        Alert::alert('Gagal Login', 'Password atau email tidak ditemukan', 'error');
+        alert('Gagal Login', 'Password atau email tidak ditemukan', 'error');
         return back()->withInput();
     }
 
@@ -50,26 +51,41 @@ class AuthController extends Controller
     public function registerProcess(Request $request)
     {
         try {
-            $user = new User();
             $user['name'] = $request->name;
             $user['email'] = $request->email;
             $user['number'] = $request->number;
             $user['address'] = $request->address;
             $user['user_type'] = $request->user_type;
-            if ($request->retype_password != $request->password) {
-                return redirect()->back();
+            $user['password'] = $request->password;
+
+            if (User::where('email', $user['email'])->count() > 0) {
+                alert('Gagal register', 'Email telah digunakan', 'error');
+                return back()->withInput();
             }
+
+            if (User::where('number', $user['number'])->count() > 0) {
+                alert('Gagal register', 'Nomor HP telah digunakan', 'error');
+                return back()->withInput();
+            }
+
+            if ($user['password'] != $request->retype_password) {
+                alert('Gagal register', 'Password tidak sama', 'error');
+                return back()->withInput();
+            }
+
             $user['password'] = Hash::make($request->password);
 
-            $user->save();
-        } catch (QueryException $error) {
-            Alert::alert('Gagal Register', '', 'error');
-            return back()->withInput();
-        } finally {
-            Alert::alert('Berhasil Register', 'register', 'success');
+
+            // dd($user);
+            User::create($user);
+            alert('Berhasil Register', 'Register berhasil', 'success');
             return redirect()->route('login');
+        } catch (Exception $error) {
+            alert('Gagal register', 'Register gagal', 'error');
+            return back()->withInput();
         }
     }
+
 
     public function logout(Request $request)
     {
