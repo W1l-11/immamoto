@@ -3,14 +3,14 @@
         <div class="navbar-buttons">
             @if (!auth()->user())
                 <!-- Tombol Daftar -->
-                <a href="{{ route('register') }}" class="btn btn-daftar">Daftar</a>
+                <a href="{{ route('register') }}" class="btn btn-white">Daftar</a>
                 <!-- Tombol Masuk -->
-                <a href="{{ route('login') }}" class="btn btn-masuk">Masuk</a>
+                <a href="{{ route('login') }}" class="btn btn-danger">Masuk</a>
             @else
                 @auth
                     <!-- Tombol Jual -->
                     @if (auth()->user()->user_type == 'dealer')
-                        <a href="" class="btn btn-jual">Jual</a>
+                        <a href="" class="btn-jual flex flex-row justify-center items-center rounded-full py-2 px-10">Jual</a>
                     @endif
                     <a href="#" class="btn btn-profile"><img src="{{ asset('account.png') }}" alt="Profile" width="45px" height="45px"></a>
                     <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>

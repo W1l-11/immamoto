@@ -31,5 +31,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['check_login:dealer'])->prefix('/dealer')->name('dealer')->group(function () {
         Route::get('/', [DealerController::class, 'index'])->name('.index');
+        Route::post('/', [DealerController::class, 'store'])->name('.store');
     });
 });
