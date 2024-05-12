@@ -297,7 +297,10 @@
                 {{-- <div class="check flex flex-row-reverse px-4 py-2">
                 <input type="checkbox">
                 </div> --}}
-                <img src="{{ $transaction->motor->image }}" alt="{{ $transaction->motor->image }}">
+                @foreach (explode(',', $transaction->motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $image }}">
+                        @break
+                @endforeach
             </div>
             <div class="p-6">
                 <div class="flex items-center justify-between mb-2">

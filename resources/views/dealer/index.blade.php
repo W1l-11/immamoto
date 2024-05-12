@@ -16,7 +16,7 @@
 <label for="gambar1" class="block text-sm font-medium text-gray-700">Gambar 1:</label>
 <input required type="file" name="gambar1" id="gambar1" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
 </div>
-{{-- <div class="mb-4">
+<div class="mb-4">
 <label for="gambar2" class="block text-sm font-medium text-gray-700">Gambar 2:</label>
 <input required type="file" name="gambar2" id="gambar2" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
 </div>
@@ -24,7 +24,7 @@
 <label for="gambar3" class="block text-sm font-medium text-gray-700">Gambar 3:</label>
 <input required type="file" name="gambar3" id="gambar3" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
 </div>
-<div class="flex justify-center">
+{{-- <div class="flex justify-center">
 <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Upload</button>
 </div> --}}
 </div>

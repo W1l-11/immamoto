@@ -292,7 +292,7 @@
     <div class="pembungkus px-12">
         <a id="card" href="cardview.php" class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96 px-4 py-2">
           <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-48">
-            <img src="{{ $transaction->motor->image }}" alt="">
+            <img src="{{ asset('motor/'.$transaction->motor->image) }}" alt="">
           </div>
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">

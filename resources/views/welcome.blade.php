@@ -411,7 +411,10 @@
         <!-- Card 1 -->
         <div class="card-container">
         <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
-            <img src="{{ asset($motor->image.'.png') }}" alt="{{ $motor->image }}">
+            @foreach (explode(',', $motor->image) as $image)
+                <img src="{{ asset('motor/'.$image) }}" alt="{{ $motor->image }}">
+                @break
+            @endforeach
             <div class="card-content">
                 <h3>{{ $motor->name }}</h3>
                 <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
@@ -473,7 +476,10 @@
             @foreach ($motors as $motor)
                 <!-- Card 1 -->
                 <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
-                    <img src="{{ asset($motor->image.'.png') }}" alt="{{ $motor->image }}">
+                    @foreach (explode(',', $motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $motor->image }}">
+                        @break
+                    @endforeach
                     <div class="card-content">
                         <h3>{{ $motor->name }}</h3>
                         <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>
@@ -498,7 +504,10 @@
             @foreach ($motors as $motor)
                 <!-- Card 1 -->
                 <a href="{{ route('customer.view-motor', $motor->id) }}" class="product-card">
-                    <img src="{{ asset($motor->image.'.png') }}" alt="{{ $motor->image }}">
+                    @foreach (explode(',', $motor->image) as $image)
+                        <img src="{{ asset('motor/'.$image) }}" alt="{{ $motor->image }}">
+                        @break
+                    @endforeach
                     <div class="card-content">
                         <h3>{{ $motor->name }}</h3>
                         <p>Rp {{ number_format($motor->price, 2, ',', '.') }}</p>

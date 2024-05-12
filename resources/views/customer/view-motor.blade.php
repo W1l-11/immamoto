@@ -295,23 +295,26 @@
 
   <!--Carousel items-->
   <div
-    class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+  class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+
+  @foreach (explode(',', $motor->image) as $image)
     <!--First item-->
-    <div
-      class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-      data-twe-carousel-active
-      data-twe-carousel-item
-      style="backface-visibility: hidden">
-      <img
-        src="{{asset('r6.jpeg')}}"
-        class="block w-full object-scale-down"
-        alt="..." />
-      <div
-        class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
-        <h5 class="text-xl">Front Body</h5>
-      </div>
-    </div>
-    <!--Second item-->
+        <div
+        class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+        {{ $loop->iteration == 1 ? 'data-twe-carousel-active':'' }}
+        data-twe-carousel-item
+        style="backface-visibility: hidden">
+        <img
+            src="{{asset('motor/'.$image)}}"
+            class="block w-full object-scale-down"
+            alt="{{ $image }}" />
+            {{-- <div
+                class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
+                <h5 class="text-xl">Front Body</h5>
+            </div> --}}
+        </div>
+    @endforeach
+    {{-- <!--Second item-->
     <div
       class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
       data-twe-carousel-item
@@ -337,7 +340,7 @@
       <div
         class="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-black md:block">
         <h5 class="text-xl">Side Body</h5>
-      </div>
+      </div>--}}
     </div>
   </div>
 
