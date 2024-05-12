@@ -57,6 +57,7 @@ class CustomerController extends Controller
             'payment_id' => $request->payment_id,
             'is_success' => '1',
             'total_payment' => $request->total_payment,
+            'amount' => $request->amount,
             'datetime' => now()->format('Y-m-d H:i:s')
         ]);
 
@@ -67,7 +68,7 @@ class CustomerController extends Controller
 
         alert('Pembayaran sukses', 'Pembayaranmu telah sukses', 'success');
 
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.history');
     }
 
     public function history()
