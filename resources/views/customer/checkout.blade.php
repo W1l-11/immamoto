@@ -319,9 +319,9 @@
 <div class="deskripsi_bawah">
   <div class="flex flex-col gap-2">
         <label for="username">Nama penerima</label>
-        <input type="text" value="{{ auth()->user()->name }}" name="name" class="font-bold text-lg">
+        <input type="text" value="{{ auth()->user()->name }}" name="name" class="font-bold text-lg " disabled>
         <label for="address">Alamat pengiriman</label>
-        <input type="text" value="{{ auth()->user()->address }}" name="address" class="font-bold text-lg">
+        <input type="text" value="{{ auth()->user()->address }}" name="address" class="font-bold text-lg " disabled>
         <label for="send_option">Opsi pengiriman</label>
         <select value="{{ auth()->user()->address }}" name="send_option" required class="font-bold text-lg">
             <option value="">Pilih opsi pengiriman</option>
