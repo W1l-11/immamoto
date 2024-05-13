@@ -333,7 +333,7 @@
 <div class="deskripsi_bawah">
   <div class="flex flex-col gap-2">
         <pre class="font-bold text-lg">Nama penerima          : {{ App\Models\User::find($transaction->customer_id)->name }}</pre>
-        <pre class="font-bold text-lg">Alamat pengiriman      : {{ App\Models\User::find($transaction->customer_id)->name }}</pre>
+        <pre class="font-bold text-lg">Alamat pengiriman      : {{ App\Models\User::find($transaction->customer_id)->address }}</pre>
         <pre class="font-bold text-lg">Opsi pengiriman        : {{ App\Models\SendOption::find($transaction->send_option_id)->name }}</pre>
         <pre class="font-bold text-lg">Pembayaran             : {{ App\Models\Payment::find($transaction->payment_id)->name }}</pre>
   </div>
